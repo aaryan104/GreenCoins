@@ -1,0 +1,2628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenCoin - Plant Trees. Earn Credits. Save Earth.</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary-color: #2ecc71;
+            --primary-dark: #27ae60;
+            --secondary-color: #3498db;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --danger-color: #e74c3c;
+            --success-color: #2ecc71;
+            --text-color: #333;
+            --text-light: #7f8c8d;
+            --box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: #f9f9f9;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--dark-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            margin-left: 15px;
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(46, 204, 113, 0.3);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo a {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .logo a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .login-btn {
+            background: var(--primary-color);
+            color: white !important;
+            padding: 8px 20px !important;
+            border-radius: 50px;
+            transition: var(--transition);
+        }
+
+        .login-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .login-btn::after {
+            display: none !important;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px 0;
+            background-color: var(--dark-color);
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.2), rgba(41, 128, 185, 0.2));
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            margin-top: 40px;
+        }
+
+        /* About Section */
+        .about {
+            background-color: white;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card .icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            background-color: #f9f9f9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            right: 5%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .timeline-item {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+
+        .timeline-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 700;
+            color: var(--primary-color);
+            border: 3px solid var(--primary-color);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover .timeline-icon {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .timeline-item p {
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        /* Leaderboard Section */
+        .leaderboard {
+            background: white;
+        }
+
+        .leaderboard-table {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Counters Section */
+        .counters {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .counters .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .counter-item {
+            padding: 30px 15px;
+            transition: var(--transition);
+        }
+
+        .counter-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .counter {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 80px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-links h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+            opacity: 1;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .timeline::before {
+                left: 10%;
+                right: 10%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                padding: 40px 0;
+                transition: var(--transition);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .nav-links a {
+                font-size: 1.2rem;
+            }
+            
+            .hero {
+                min-height: 600px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .cta-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn-outline {
+                margin-left: 0;
+            }
+            
+            .timeline {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .timeline::before {
+                display: none;
+            }
+            
+            .timeline-item {
+                margin-bottom: 30px;
+                width: 100%;
+            }
+            
+            .timeline-icon {
+                margin-bottom: 10px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+        /* Modern Green Coin Styles */
+        :root {
+            --green-primary: #1B5E20;
+            --green-light: #66BB6A;
+            --green-accent: #4CAF50;
+            --blue-trust: #0D47A1;
+            --gold-coin: #FBC02D;
+            --cyan-accent: #00BCD4;
+            --white-clean: #FFFFFF;
+            --gray-light: #F8F9FA;
+            --gray-border: #E9ECEF;
+            --text-dark: #2C3E50;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Modern Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.navbar-hidden {
+            transform: translateY(-100%);
+        }
+
+        .navbar.navbar-visible {
+            transform: translateY(0);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--green-primary) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--green-primary), var(--green-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--green-primary) !important;
+            background: rgba(76, 175, 80, 0.1) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: var(--green-primary) !important;
+            background: rgba(76, 175, 80, 0.15) !important;
+        }
+
+        /* Revolutionary Hero Section */
+        .revolutionary-hero {
+            min-height: 100vh;
+            background: 
+                linear-gradient(135deg, rgba(232, 245, 233, 0.9) 0%, rgba(200, 230, 201, 0.8) 30%, rgba(165, 214, 167, 0.7) 70%, rgba(129, 199, 132, 0.8) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2381C784;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%234CAF50;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%23388E3C;stop-opacity:0.7" /></linearGradient><linearGradient id="treeGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%232E7D32;stop-opacity:0.9" /><stop offset="100%" style="stop-color:%231B5E20;stop-opacity:0.8" /></linearGradient></defs><rect width="1200" height="300" fill="url(%23skyGrad)"/><polygon points="0,300 150,250 300,280 450,240 600,270 750,230 900,260 1050,220 1200,250 1200,800 0,800" fill="url(%23treeGrad)"/><ellipse cx="200" cy="280" rx="40" ry="60" fill="%234CAF50" opacity="0.8"/><ellipse cx="180" cy="270" rx="35" ry="55" fill="%2366BB6A" opacity="0.7"/><ellipse cx="220" cy="275" rx="30" ry="50" fill="%23388E3C" opacity="0.9"/><ellipse cx="500" cy="270" rx="45" ry="65" fill="%234CAF50" opacity="0.8"/><ellipse cx="480" cy="260" rx="40" ry="60" fill="%2366BB6A" opacity="0.7"/><ellipse cx="520" cy="265" rx="35" ry="55" fill="%23388E3C" opacity="0.9"/><ellipse cx="800" cy="275" rx="50" ry="70" fill="%234CAF50" opacity="0.8"/><ellipse cx="780" cy="265" rx="45" ry="65" fill="%2366BB6A" opacity="0.7"/><ellipse cx="820" cy="270" rx="40" ry="60" fill="%23388E3C" opacity="0.9"/><ellipse cx="1000" cy="265" rx="35" ry="55" fill="%234CAF50" opacity="0.8"/><ellipse cx="980" cy="255" rx="30" ry="50" fill="%2366BB6A" opacity="0.7"/><ellipse cx="1020" cy="260" rx="25" ry="45" fill="%23388E3C" opacity="0.9"/></svg>') center/cover;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .revolutionary-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="trees" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><text x="10" y="15" text-anchor="middle" font-size="12" fill="%234CAF50" opacity="0.3">🌳</text></pattern><pattern id="leaves" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse"><text x="6" y="9" text-anchor="middle" font-size="8" fill="%2366BB6A" opacity="0.25">🍃</text></pattern></defs><rect width="100" height="100" fill="url(%23trees)"/><rect width="100" height="100" fill="url(%23leaves)"/></svg>');
+            opacity: 0.6;
+            animation: backgroundFloat 25s ease-in-out infinite;
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-10px) translateY(-5px); }
+            50% { transform: translateX(5px) translateY(-10px); }
+            75% { transform: translateX(-5px) translateY(5px); }
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="tree" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><text x="10" y="15" text-anchor="middle" font-size="12" fill="%23c8e6c9" opacity="0.3">🌳</text></pattern></defs><rect width="100" height="100" fill="url(%23tree)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--green-primary), var(--green-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary-green {
+            background: linear-gradient(135deg, var(--green-primary), var(--green-accent));
+            border: none;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-primary-green:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-outline-green {
+            border: 2px solid var(--green-primary);
+            color: var(--green-primary);
+            padding: 1rem 2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-green:hover {
+            background: var(--green-primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-border);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--green-primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-dark);
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        /* Animated Background */
+        .hero-bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Particle System */
+        .particle-system {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #4CAF50, #81C784);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite linear;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: -2s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: -4s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: -6s; }
+        .particle:nth-child(5) { left: 60%; animation-delay: -8s; }
+        .particle:nth-child(6) { left: 70%; animation-delay: -10s; }
+        .particle:nth-child(7) { left: 80%; animation-delay: -12s; }
+        .particle:nth-child(8) { left: 90%; animation-delay: -14s; }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Morphing Shapes */
+        .morphing-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: morphing 20s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, rgba(76, 175, 80, 0.1), rgba(129, 199, 132, 0.1));
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, rgba(33, 150, 243, 0.1), rgba(100, 181, 246, 0.1));
+            top: 60%;
+            right: 20%;
+            animation-delay: -7s;
+        }
+
+        .shape-3 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(45deg, rgba(255, 193, 7, 0.1), rgba(255, 238, 88, 0.1));
+            bottom: 30%;
+            left: 50%;
+            animation-delay: -14s;
+        }
+
+        @keyframes morphing {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* Hero Content */
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 10;
+            padding: 2rem;
+        }
+
+        /* Glitch Effect Title */
+        .glitch-container {
+            margin-bottom: 2rem;
+        }
+
+        .glitch-text {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #1B5E20;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: glitch 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-text::before {
+            animation: glitch-1 0.5s infinite;
+            color: #ff0040;
+            z-index: -1;
+        }
+
+        .glitch-text::after {
+            animation: glitch-2 0.5s infinite;
+            color: #00ff40;
+            z-index: -2;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(2px, -2px); }
+            40% { transform: translate(2px, 2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(-2px, 2px); }
+        }
+
+        .glitch-subtitle {
+            color: #2E7D32;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Typewriter Effect */
+        .typewriter-container {
+            margin: 2rem 0;
+        }
+
+        .typewriter-text {
+            font-size: 1.1rem;
+            color: rgba(27, 94, 32, 0.9);
+            line-height: 1.6;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .cursor {
+            display: inline-block;
+            background-color: #4CAF50;
+            margin-left: 0.1rem;
+            width: 3px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Interactive Stats Orbs */
+        .stats-orbs {
+            display: flex;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .orb {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .orb-inner {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(129, 199, 132, 0.1));
+            border: 2px solid rgba(76, 175, 80, 0.3);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .orb:hover .orb-inner {
+            transform: scale(1.1);
+            border-color: rgba(76, 175, 80, 0.8);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(129, 199, 132, 0.2));
+        }
+
+        .orb-glow {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .orb:hover .orb-glow {
+            opacity: 1;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .orb-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .orb-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4CAF50;
+        }
+
+        .orb-label {
+            font-size: 0.8rem;
+            color: rgba(27, 94, 32, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Holographic CTA Buttons */
+        .holographic-cta {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .holo-btn {
+            position: relative;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(129, 199, 132, 0.3));
+            border: 2px solid rgba(46, 125, 50, 0.6);
+            border-radius: 50px;
+            color: #1B5E20;
+            text-decoration: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .holo-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .holo-btn:hover::before {
+            left: 100%;
+        }
+
+        .holo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+            border-color: rgba(46, 125, 50, 0.8);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.3), rgba(129, 199, 132, 0.4));
+            color: #fff;
+        }
+
+        .btn-text {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* 3D Earth Visualization */
+        .visualization-container {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .earth-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .earth-sphere {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            animation: earthRotate 20s linear infinite;
+            box-shadow: 
+                inset -20px -20px 50px rgba(0, 0, 0, 0.5),
+                0 0 50px rgba(76, 175, 80, 0.3);
+        }
+
+        .earth-surface {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(76, 175, 80, 0.8) 10%, transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(76, 175, 80, 0.6) 15%, transparent 45%),
+                radial-gradient(circle at 20% 80%, rgba(76, 175, 80, 0.7) 12%, transparent 35%);
+        }
+
+        .earth-atmosphere {
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            top: -5%;
+            left: -5%;
+            border-radius: 50%;
+            background: radial-gradient(circle, transparent 60%, rgba(100, 181, 246, 0.2) 100%);
+            animation: atmosphereGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes earthRotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        @keyframes atmosphereGlow {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Orbiting Elements */
+        .orbit {
+            position: absolute;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            border-radius: 50%;
+            animation: orbitRotate 15s linear infinite;
+        }
+
+        .orbit-1 {
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            animation-duration: 10s;
+        }
+
+        .orbit-2 {
+            width: 140%;
+            height: 140%;
+            top: -20%;
+            left: -20%;
+            animation-duration: 15s;
+            animation-direction: reverse;
+        }
+
+        .orbit-3 {
+            width: 160%;
+            height: 160%;
+            top: -30%;
+            left: -30%;
+            animation-duration: 20s;
+        }
+
+        .orbit-element {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(76, 175, 80, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+        }
+
+        @keyframes orbitRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            z-index: 10;
+        }
+
+        .scroll-text {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .scroll-arrow {
+            width: 2px;
+            height: 30px;
+            background: rgba(76, 175, 80, 0.5);
+            margin: 0 auto;
+            position: relative;
+            animation: scrollBounce 2s infinite;
+        }
+
+        .arrow-head {
+            position: absolute;
+            bottom: 0;
+            left: -3px;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid rgba(76, 175, 80, 0.5);
+            border-bottom: 2px solid rgba(76, 175, 80, 0.5);
+            transform: rotate(45deg);
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* Factory Animation Styles */
+        .factory-animation {
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            z-index: 5;
+        }
+
+        .factory-building {
+            position: relative;
+            font-size: 3rem;
+            animation: factoryPulse 3s ease-in-out infinite;
+        }
+
+        .smoke-stack {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .smoke {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(200, 200, 200, 0.6);
+            border-radius: 50%;
+            animation: smokeRise 4s ease-out infinite;
+        }
+
+        .smoke-1 {
+            left: -10px;
+            animation-delay: 0s;
+        }
+
+        .smoke-2 {
+            left: 0px;
+            animation-delay: 1s;
+        }
+
+        .smoke-3 {
+            left: 10px;
+            animation-delay: 2s;
+        }
+
+        @keyframes factoryPulse {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.05); filter: brightness(1.2); }
+        }
+
+        @keyframes smokeRise {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-30px) scale(1);
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-60px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Carbon Credit Flow */
+        .carbon-flow {
+            position: absolute;
+            top: 50%;
+            left: -50px;
+            width: 200px;
+            height: 100px;
+        }
+
+        .credit-particle {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: creditFlow 6s ease-in-out infinite;
+        }
+
+        .credit-1 {
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .credit-2 {
+            top: 50%;
+            animation-delay: 2s;
+        }
+
+        .credit-3 {
+            top: 80%;
+            animation-delay: 4s;
+        }
+
+        @keyframes creditFlow {
+            0% {
+                transform: translateX(0) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+                transform: translateX(50px) scale(1);
+            }
+            80% {
+                opacity: 1;
+                transform: translateX(150px) scale(1);
+            }
+            100% {
+                transform: translateX(200px) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Nature Elements */
+        .nature-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-tree {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: treeFloat 8s ease-in-out infinite;
+        }
+
+        .tree-1 {
+            top: 15%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .tree-2 {
+            bottom: 20%;
+            left: 10%;
+            animation-delay: -3s;
+        }
+
+        .floating-leaf {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: leafFloat 12s ease-in-out infinite;
+        }
+
+        .leaf-1 {
+            top: 25%;
+            right: 15%;
+            animation-delay: 0s;
+        }
+
+        .leaf-2 {
+            top: 60%;
+            right: 25%;
+            animation-delay: -4s;
+        }
+
+        .leaf-3 {
+            bottom: 30%;
+            right: 10%;
+            animation-delay: -8s;
+        }
+
+        @keyframes treeFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                filter: brightness(1);
+            }
+            25% {
+                transform: translateY(-10px) rotate(2deg);
+                filter: brightness(1.1);
+            }
+            50% {
+                transform: translateY(-5px) rotate(0deg);
+                filter: brightness(1.2);
+            }
+            75% {
+                transform: translateY(-15px) rotate(-2deg);
+                filter: brightness(1.1);
+            }
+        }
+
+        @keyframes leafFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.7;
+            }
+            25% {
+                transform: translateY(-20px) rotate(90deg) scale(1.1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-10px) rotate(180deg) scale(0.9);
+                opacity: 0.8;
+            }
+            75% {
+                transform: translateY(-30px) rotate(270deg) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Enhanced Data Flow */
+        .data-flow {
+            position: absolute;
+            bottom: 10%;
+            left: 20%;
+            width: 60%;
+            height: 20%;
+            z-index: 3;
+        }
+
+        .flow-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.6), transparent);
+            animation: dataFlow 3s ease-in-out infinite;
+        }
+
+        .flow-1 {
+            top: 20%;
+            width: 40%;
+            left: 0;
+            animation-delay: 0s;
+        }
+
+        .flow-2 {
+            top: 50%;
+            width: 60%;
+            left: 20%;
+            animation-delay: 1s;
+        }
+
+        .flow-3 {
+            top: 80%;
+            width: 50%;
+            left: 10%;
+            animation-delay: 2s;
+        }
+
+        .flow-node {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: rgba(76, 175, 80, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        .node-1 {
+            top: 15%;
+            left: 35%;
+        }
+
+        .node-2 {
+            top: 45%;
+            left: 65%;
+        }
+
+        .node-3 {
+            top: 75%;
+            left: 45%;
+        }
+
+        .node-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(76, 175, 80, 0.3);
+            animation: nodePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes dataFlow {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scaleX(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scaleX(1.2);
+            }
+        }
+
+        @keyframes nodePulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(2);
+                opacity: 0.2;
+            }
+        }
+
+        /* Section Styles */
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            opacity: 0.7;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Workflow Cards */
+        .workflow-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-border);
+            height: 100%;
+        }
+
+        .workflow-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .workflow-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .workflow-steps {
+            list-style: none;
+            padding: 0;
+        }
+
+        .workflow-steps li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .workflow-steps li i {
+            color: var(--green-accent);
+            width: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-primary-green,
+            .btn-outline-green {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.1;
+            font-size: 2rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Infographic Styles */
+        .infographic-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .infographic-step {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .step-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            margin: 0 auto 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .infographic-step h4 {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .infographic-step p {
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+
+        .arrow {
+            font-size: 2rem;
+            color: var(--green-accent);
+            font-weight: bold;
+        }
+
+        /* Workflow Section Styles */
+        .workflow-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .role-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-border);
+            height: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .role-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .role-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .workflow-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .workflow-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--green-primary), var(--green-light));
+        }
+
+        .timeline-step {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-step::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--green-accent);
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-content {
+            background: var(--gray-light);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--green-accent);
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-description {
+            color: var(--text-dark);
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Leaderboard Preview */
+        .leaderboard-preview {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            background: var(--gray-light);
+            transition: all 0.3s ease;
+        }
+
+        .leaderboard-item:hover {
+            transform: translateX(5px);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .rank-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+        }
+
+        .user-info h5 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .user-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Impact Section */
+        .impact-section {
+            background: linear-gradient(135deg, var(--green-primary) 0%, var(--green-accent) 100%);
+            color: white;
+        }
+
+        .impact-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .impact-number {
+            font-size: 3rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, white 100%);
+        }
+
+        .cta-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-border);
+        }
+
+        .cta-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .cta-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .cta-card h4 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .cta-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .btn-outline-green {
+            border: 2px solid var(--green-primary);
+            color: var(--green-primary);
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-green:hover {
+            background: var(--green-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hover effects for footer links */
+        .hover-opacity-100:hover {
+            opacity: 1 !important;
+        }
+
+        @media (max-width: 768px) {
+            .infographic-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+            
+            .workflow-section .col-lg-6 {
+                margin-bottom: 2rem;
+            }
+            
+            .leaderboard-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .rank-badge {
+                position: static;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">GreenCoin <span>🌱</span></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#top" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#Work-flow">Workflow</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#footer">Contact</a></li>
+                <li><a href="auth/login.php" class="login-btn">Login / Register</a></li>
+            </ul>
+            <div class="hamburger">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="top">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Plant Trees. Earn Credits. Save Earth.</h1>
+                <p>Every tree you plant becomes a Green Credit – support our planet & earn rewards.</p>
+                <div class="cta-buttons">
+                    <a href="auth/register.php" class="btn btn-primary">Get Started</a>
+                    <a href="#how-it-works" class="btn btn-outline">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Green Coin Section -->
+    <section id="about" class="section-padding bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title">About Green Coin</h2>
+                    <p class="section-subtitle">
+                        Green Coin converts tree plantation into digital Green Credits, which are later sold to
+                        factories as Carbon Credits.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Animated Infographic -->
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="infographic-container">
+                        <div class="infographic-step">
+                            <div class="step-icon"
+                                style="background: linear-gradient(135deg, var(--green-primary), var(--green-light));">
+                                <i class="fas fa-seedling"></i>
+                            </div>
+                            <h4>Plant Tree</h4>
+                            <p>Users plant trees and submit proof</p>
+                        </div>
+
+                        <div class="arrow">→</div>
+
+                        <div class="infographic-step">
+                            <div class="step-icon"
+                                style="background: linear-gradient(135deg, var(--blue-trust), var(--cyan-accent));">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h4>NGO Verification</h4>
+                            <p>NGOs verify and approve tree proofs</p>
+                        </div>
+
+                        <div class="arrow">→</div>
+
+                        <div class="infographic-step">
+                            <div class="step-icon"
+                                style="background: linear-gradient(135deg, var(--gold-coin), #FF9800);">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <h4>Earn Credits</h4>
+                            <p>Users receive Green Credits (1 tree = 5 credits)</p>
+                        </div>
+
+                        <div class="arrow">→</div>
+
+                        <div class="infographic-step">
+                            <div class="step-icon" style="background: linear-gradient(135deg, #9C27B0, #E91E63);">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <h4>Sell to Factories</h4>
+                            <p>Credits sold as Carbon Credits to factories</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="Work-flow" class="timeline-section">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">1</div>
+                    <p>Register</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">2</div>
+                    <p>Plant Tree</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">3</div>
+                    <p>Submit Proof</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">4</div>
+                    <p>NGO Verify</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">5</div>
+                    <p>Earn Credits</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">6</div>
+                    <p>Sell/Buy Credits</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section-padding Work-flow-section">
+        <div class="container">
+            <h2 class="section-title">How Green Coin Works</h2>
+            <p class="section-subtitle">
+                Detailed workflow for Users, Factories, NGOs, and Admin - each playing a crucial role in our ecosystem
+            </p>
+            
+            <div class="row g-4">
+                <!-- User Workflow -->
+                <div class="col-lg-6">
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon" style="background: linear-gradient(135deg, var(--green-primary), var(--green-light));">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <h3 class="role-title">User Journey</h3>
+                        </div>
+                        
+                        <div class="workflow-timeline">
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Register & Login</div>
+                                    <div class="step-description">Create account and access dashboard</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Submit Plant Proof</div>
+                                    <div class="step-description">Upload tree photos with location data</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">NGO Verification</div>
+                                    <div class="step-description">Wait for NGO approval of tree proof</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Earn Credits</div>
+                                    <div class="step-description">Receive 5 Green Credits per verified tree</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Sell Credits & Get Money</div>
+                                    <div class="step-description">Convert credits to real money through admin</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Access: My Proof page, Leaderboard, Transaction history
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Factory Workflow -->
+                <div class="col-lg-6">
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon" style="background: linear-gradient(135deg, var(--blue-trust), var(--cyan-accent));">
+                                <i class="fas fa-industry"></i>
+                            </div>
+                            <h3 class="role-title">Factory Process</h3>
+                        </div>
+                        
+                        <div class="workflow-timeline">
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Register & Login</div>
+                                    <div class="step-description">Create factory account and access dashboard</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Buy Credits Request</div>
+                                    <div class="step-description">Submit request to purchase carbon credits</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Admin Verification</div>
+                                    <div class="step-description">Wait for admin approval of purchase request</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Receive Credits</div>
+                                    <div class="step-description">Get carbon credits for pollution offset</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Pollution Data Report</div>
+                                    <div class="step-description">Submit environmental impact reports</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Access: Credit Balance Report, Purchase History
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- NGO Workflow -->
+                <div class="col-lg-6">
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon" style="background: linear-gradient(135deg, var(--gold-coin), #FF9800);">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <h3 class="role-title">NGO Operations</h3>
+                        </div>
+                        
+                        <div class="workflow-timeline">
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Register & Login</div>
+                                    <div class="step-description">Create NGO account with verification</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Access Proof Verification</div>
+                                    <div class="step-description">Review submitted tree planting proofs</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Verify/Reject Proofs</div>
+                                    <div class="step-description">Approve or reject tree planting evidence</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Update User Credits</div>
+                                    <div class="step-description">Automatically award credits for verified trees</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Role: Independent verification authority
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Admin Workflow -->
+                <div class="col-lg-6">
+                    <div class="role-card">
+                        <div class="role-header">
+                            <div class="role-icon" style="background: linear-gradient(135deg, #9C27B0, #E91E63);">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                            <h3 class="role-title">Admin Control</h3>
+                        </div>
+                        
+                        <div class="workflow-timeline">
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Middle Man Operations</div>
+                                    <div class="step-description">Facilitate transactions between users & factories</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Approve User Sell Requests</div>
+                                    <div class="step-description">Process user credit sales and provide money</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Approve Factory Buy Requests</div>
+                                    <div class="step-description">Process factory purchases and send credits</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-step">
+                                <div class="step-content">
+                                    <div class="step-title">Manage Users & Factories</div>
+                                    <div class="step-description">Block/delete accounts, view all transactions</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-3">
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Full access: All transactions, credit transfers, user management
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Counters -->
+    <section class="counters">
+        <div class="container">
+            <div class="counter-item">
+                <div class="counter-icon">🌱</div>
+                <div class="counter" data-target="125000">0</div>
+                <p>Trees Planted</p>
+            </div>
+            <div class="counter-item">
+                <div class="counter-icon">💎</div>
+                <div class="counter" data-target="1250000">0</div>
+                <p>Credits Earned</p>
+            </div>
+            <div class="counter-item">
+                <div class="counter-icon">🏭</div>
+                <div class="counter" data-target="250">0</div>
+                <p>Factories Supported</p>
+            </div>
+            <div class="counter-item">
+                <div class="counter-icon">🌍</div>
+                <div class="counter" data-target="12500">0</div>
+                <p>CO₂ Reduced (tons)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>GreenCoin <span>🌱</span></h3>
+                    <p>Making sustainability rewarding for everyone.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#leaderboard">Leaderboard</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h4>Follow Us</h4>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GreenCoin. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+            const navLinksItems = document.querySelectorAll('.nav-links li');
+
+            hamburger.addEventListener('click', () => {
+                // Toggle mobile menu
+                navLinks.classList.toggle('active');
+                // Animate hamburger to X
+                hamburger.classList.toggle('active');
+            });
+
+            // Close mobile menu when clicking on a nav item
+            navLinksItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    hamburger.classList.remove('active');
+                });
+            });
+
+            // Navbar scroll effect
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Animate counter numbers
+            function animateCounters() {
+                const counters = document.querySelectorAll('.counter');
+                const speed = 200; // The lower the faster
+                
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const increment = target / speed;
+                    
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment);
+                        setTimeout(animateCounters, 1);
+                    } else {
+                        counter.innerText = target.toLocaleString();
+                    }
+                });
+            }
+
+            // Intersection Observer for counter animation
+            const observerOptions = {
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounters();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const counterSection = document.querySelector('.counters');
+            if (counterSection) {
+                observer.observe(counterSection);
+            }
+
+            // Add active class to current section in navigation
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-links a');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href').includes(current)) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+<!-- <php require_once __DIR__ . '/functions.php'; ?>
+<php include __DIR__ . '/header.php'; ?>
+<main class="container py-5">
+  <h1 class="mb-3">GreenCoin – Setup Check</h1>
+  <p class="lead">If you can see this page, Apache/PHP are running. Next we check database & tables.</p>
+  <php
+    try {
+        $res = db()->query("SHOW TABLES");
+        $tables = [];
+        while ($row = $res->fetch_array()) { $tables[] = $row[0]; }
+        $needed = ['users','trees','scans','leaderboard'];
+        $have = array_intersect($needed, $tables);
+        if (count($have) === count($needed)) {
+            echo '<div class="alert alert-success">Database OK ✅ — All required tables found.</div>';
+        } else {
+            echo '<div class="alert alert-warning">Database connected, but some tables are missing. Please import the SQL at <code>_sql/greencoin_schema.sql</code> using phpMyAdmin.</div>';
+        }
+    } catch (Throwable $e) {
+        echo '<div class="alert alert-danger">DB connection problem: ' . e($e->getMessage()) . '</div>';
+    }
+  ?>
+  <ul class="mt-3">
+    <li>DB Name: <code><= e(DB_NAME) ?></code></li>
+    <li>Project Path (BASE_URL): <code><= e(BASE_URL) ?></code></li>
+    <li>SQL File: <code><= e(BASE_URL) ?>/_sql/greencoin_schema.sql</code> (open in Explorer & import via phpMyAdmin)</li>
+  </ul>
+  <hr class="my-4">
+  <p>Next steps: Create login/register pages, add-tree form, and QR logic (Days 2–4).</p>
+</main>
+<php include __DIR__ . '/footer.php'; ?> -->

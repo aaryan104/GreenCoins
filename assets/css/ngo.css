@@ -1,0 +1,244 @@
+/* NGO Verification Panel Styles */
+:root {
+    --primary: #10b981;   /* emerald */
+    --primary-dark: #059669;
+    --danger: #ef4444;
+    --success: #10b981;
+    --bg: #f9fafb;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --radius: 0.75rem;
+    --shadow: 0 6px 18px rgba(0,0,0,0.06);
+    --transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+  }
+  
+  /* Container */
+  .verification-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  /* Header */
+  .verification-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .verification-header h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-dark);
+    margin-bottom: 0.5rem;
+  }
+  .verification-header p {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  
+  /* Alerts */
+  .alert {
+    padding: 1rem;
+    border-radius: var(--radius);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+  }
+  .alert-success {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--success);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+  }
+  .alert-danger {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+  }
+  
+  /* Section Title */
+  .pending-proofs h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .pending-proofs h2 i {
+    color: var(--primary);
+  }
+  
+  /* Grid */
+  .proofs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  /* Proof Card */
+  .proof-card {
+    background: #fff;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+  }
+  .proof-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  }
+  
+  /* Proof Image */
+  .proof-image {
+    position: relative;
+    overflow: hidden;
+    max-height: 200px;
+  }
+  .proof-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+  }
+  .qrcode-overlay {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: #fff;
+    padding: 4px;
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .qrcode-overlay img {
+    width: 60px;
+    height: 60px;
+  }
+  .qrcode-overlay.show img {
+    width: 140px;
+    height: 140px;
+  }
+  
+  /* Proof Details */
+  .proof-details {
+    padding: 1rem 1.25rem;
+    flex: 1;
+  }
+  .proof-details h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+    color: var(--primary-dark);
+  }
+  .detail-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+  }
+  .detail-label {
+    font-weight: 600;
+    color: var(--muted);
+    width: 120px;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  .detail-value {
+    flex: 1;
+    color: var(--text);
+  }
+  
+  /* Actions */
+  .verification-actions {
+    display: flex;
+    gap: 0.6rem;
+    padding: 1rem;
+    border-top: 1px solid var(--border);
+    justify-content: flex-end;
+  }
+  .btn {
+    padding: 0.6rem 1.1rem;
+    border-radius: var(--radius);
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .btn-verify {
+    background: var(--primary);
+    color: #fff;
+  }
+  .btn-verify:hover {
+    background: var(--primary-dark);
+  }
+  .btn-reject {
+    background: var(--danger);
+    color: #fff;
+  }
+  .btn-reject:hover {
+    background: #dc2626;
+  }
+  
+  /* Empty State */
+  .no-proofs {
+    text-align: center;
+    padding: 2rem;
+    background: #fff;
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    color: var(--muted);
+    grid-column: 1 / -1;
+  }
+  .no-proofs i {
+    font-size: 2rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  
+  /* Footer */
+  .footer {
+    margin-top: 3rem;
+    padding: 1.5rem;
+    background: #fff;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .footer .logout-link {
+    margin-left: 1rem;
+    color: var(--danger);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+  .footer .logout-link:hover {
+    color: #b91c1c;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .verification-container { padding: 1rem; }
+    .proof-details h3 { font-size: 1rem; }
+    .detail-label { width: 100px; font-size: 0.85rem; }
+    .detail-value { font-size: 0.85rem; }
+    .verification-actions { flex-direction: column; align-items: stretch; }
+    .btn { justify-content: center; }
+  }
+  

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NGO Verification Panel</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#f5f7fa",
+                        secondary: "#e2e8f0",
+                    },
+                    borderRadius: {
+                        none: "0px",
+                        sm: "4px",
+                        DEFAULT: "8px",
+                        md: "12px",
+                        lg: "16px",
+                        xl: "20px",
+                        "2xl": "24px",
+                        "3xl": "32px",
+                        full: "9999px",
+                        button: "8px",
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
+        body {
+            color: black;
+        }
+    </style>
+</head>
+
+<body class="bg-white min-h-screen">
+    <div class="w-full">
+        <header class="bg-primary border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-6 py-4">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center space-x-8">
+                        <h1 class="text-2xl font-bold text-black">
+                            NGO Tree Verification Dashboard
+                        </h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-gray-600">Welcome, Admin</span>
+                        <a href="/logout"
+                            class="flex items-center space-x-1 px-4 py-2 bg-white border border-gray-200 rounded-button hover:bg-gray-50 text-gray-700">
+                            <i class="ri-logout-box-line"></i>
+                            <span>Logout</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="px-6 py-6">
+            <div class="mb-6">
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="sortTable('id')"
+                        class="px-4 py-2 bg-white border border-gray-200 rounded-button hover:bg-gray-50 text-gray-700 whitespace-nowrap">
+                        <i class="ri-sort-asc"></i> ID
+                    </button>
+                    <button onclick="sortTable('a-z')"
+                        class="px-4 py-2 bg-white border border-gray-200 rounded-button hover:bg-gray-50 text-gray-700 whitespace-nowrap">
+                        <i class="ri-sort-asc"></i> A-Z
+                    </button>
+                    <button onclick="sortTable('z-a')"
+                        class="px-4 py-2 bg-white border border-gray-200 rounded-button hover:bg-gray-50 text-gray-700 whitespace-nowrap">
+                        <i class="ri-sort-desc"></i> Z-A
+                    </button>
+                    <button onclick="sortTable('treecount')"
+                        class="px-4 py-2 bg-white border border-gray-200 rounded-button hover:bg-gray-50 text-gray-700 whitespace-nowrap">
+                        <i class="ri-sort-asc"></i> Tree Count
+                    </button>
+                    <button onclick="sortTable('uploaded')"
+                        class="px-4 py-2 bg-white border border-gray-200 rounded-button hover:bg-gray-50 text-gray-700 whitespace-nowrap">
+                        <i class="ri-time-line"></i> Upload Date
+                    </button>
+                    <button onclick="sortTable('species')"
+                        class="px-4 py-2 bg-white border border-gray-200 rounded-button hover:bg-gray-50 text-gray-700 whitespace-nowrap">
+                        <i class="ri-plant-line"></i> Tree Species
+                    </button>
+                </div>
+            </div>
+            <style>
+                .photo-modal {
+                    display: none;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0, 0, 0, 0.8);
+                    z-index: 1000;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
+
+                .photo-modal img {
+                    max-width: 90%;
+                    max-height: 90vh;
+                    object-fit: contain;
+                    border-radius: 0.5rem;
+                    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                }
+            </style>
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <div id="photoModal" class="photo-modal" onclick="this.style.display='none'">
+                        <img id="modalImage" src="" alt="Full size image" />
+                    </div>
+                    <table class="w-full" id="proofsTable">
+                        <thead class="bg-primary">
+                            <tr>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-black">
+                                    ID
+                                </th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-black">
+                                    Username
+                                </th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-black">
+                                    Tree Species
+                                </th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-black">
+                                    Geo Location
+                                </th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-black">
+                                    Tree Count
+                                </th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-black">
+                                    Plant Type
+                                </th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-black">
+                                    Uploaded At
+                                </th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-black">
+                                    Photo
+                                </th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-black">
+                                    QR Code
+                                </th>
+                                <th class="px-4 py-3 text-left text-sm font-semibold text-black">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-4 py-3 text-sm text-black">001</td>
+                                <td class="px-4 py-3 text-sm text-black">john_doe</td>
+                                <td class="px-4 py-3 text-sm text-black">Oak Tree</td>
+                                <td class="px-4 py-3 text-sm text-black">
+                                    40.7128°N, 74.0060°W
+                                </td>
+                                <td class="px-4 py-3 text-sm text-black">25</td>
+                                <td class="px-4 py-3 text-sm text-black">Native</td>
+                                <td class="px-4 py-3 text-sm text-black">2024-01-15 10:30</td>
+                                <td class="px-4 py-3">
+                                    <div class="relative group">
+                                        <img src="https://readdy.ai/api/search-image?query=beautiful%20oak%20tree%20saplings%20planted%20in%20forest%20ground%20with%20natural%20lighting%20and%20green%20environment%20background&width=120&height=120&seq=1&orientation=squarish"
+                                            alt="Tree Photo"
+                                            class="w-24 h-24 rounded object-cover cursor-pointer transition-transform hover:scale-105"
+                                            onclick="showFullImage(this.src)" />
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <div class="relative group">
+                                        <div
+                                            class="w-24 h-24 bg-gray-100 rounded flex items-center justify-center cursor-pointer">
+                                            <i class="ri-qr-code-line text-2xl"></i>
+                                        </div>
+                                        <div
+                                            class="hidden group-hover:flex absolute-top-2 right-0 bg-white shadow-lg rounded-lg p-2 z-10 gap-2">
+                                            <button
+                                                class="flex items-center gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-50 rounded-button">
+                                                <i class="ri-eye-line"></i> View
+                                            </button>
+                                            <button onclick="downloadQRCode(this)"
+                                                class="flex items-center gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-50 rounded-button">
+                                                <i class="ri-download-line"></i> Download
+                                            </button>
+                                        </div>
+                                        <canvas id="qr-canvas" class="hidden"></canvas>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <div class="flex gap-2">
+                                        <button onclick="showVerifyModal()"
+                                            class="bg-green-600 text-white px-3 py-1 rounded-button text-sm hover:bg-green-700 whitespace-nowrap">
+                                            Verify
+                                        </button>
+                                        <button onclick="showRejectModal()"
+                                            class="bg-red-600 text-white px-3 py-1 rounded-button text-sm hover:bg-red-700 whitespace-nowrap">
+                                            Reject
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-gray-50 bg-gray-25">
+                                <td class="px-4 py-3 text-sm text-black">002</td>
+                                <td class="px-4 py-3 text-sm text-black">sarah_green</td>
+                                <td class="px-4 py-3 text-sm text-black">Pine Tree</td>
+                                <td class="px-4 py-3 text-sm text-black">
+                                    34.0522°N, 118.2437°W
+                                </td>
+                                <td class="px-4 py-3 text-sm text-black">40</td>
+                                <td class="px-4 py-3 text-sm text-black">Evergreen</td>
+                                <td class="px-4 py-3 text-sm text-black">2024-01-14 14:20</td>
+                                <td class="px-4 py-3">
+                                    <div class="relative group">
+                                        <img src="https://readdy.ai/api/search-image?query=young%20pine%20trees%20planted%20in%20rows%20with%20forest%20background%20and%20natural%20sunlight%20filtering%20through%20branches&width=120&height=120&seq=2&orientation=squarish"
+                                            alt="Tree Photo"
+                                            class="w-24 h-24 rounded object-cover cursor-pointer transition-transform hover:scale-105"
+                                            onclick="showFullImage(this.src)" />
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <div class="relative group">
+                                        <div
+                                            class="w-24 h-24 bg-gray-100 rounded flex items-center justify-center cursor-pointer">
+                                            <i class="ri-qr-code-line text-2xl"></i>
+                                        </div>
+                                        <div
+                                            class="hidden group-hover:flex absolute -top-2 right-0 bg-white shadow-lg rounded-lg p-2 z-10 gap-2">
+                                            <button
+                                                class="flex items-center gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-50 rounded-button">
+                                                <i class="ri-eye-line"></i> View
+                                            </button>
+                                            <button onclick="downloadQRCode(this)"
+                                                class="flex items-center gap-1 px-3 py-1 text-sm text-gray-700 hover:bg-gray-50 rounded-button">
+                                                <i class="ri-download-line"></i> Download
+                                            </button>
+                                        </div>
+                                        <canvas id="qr-canvas" class="hidden"></canvas>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <div class="flex gap-2">
+                                        <button onclick="showVerifyModal()"
+                                            class="bg-green-600 text-white px-3 py-1 rounded-button text-sm hover:bg-green-700 whitespace-nowrap">
+                                            Verify
+                                        </button>
+                                        <button onclick="showRejectModal()"
+                                            class="bg-red-600 text-white px-3 py-1 rounded-button text-sm hover:bg-red-700 whitespace-nowrap">
+                                            Reject
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="verifyModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 class="text-lg font-semibold text-black mb-4">Verify Proof</h3>
+            <p class="text-gray-600 mb-6">
+                Are you sure you want to verify this proof?
+            </p>
+            <div class="flex gap-3 justify-end">
+                <button onclick="hideVerifyModal()"
+                    class="px-4 py-2 text-gray-600 border border-gray-300 rounded-button hover:bg-gray-50 whitespace-nowrap">
+                    Cancel
+                </button>
+                <button onclick="confirmVerify()"
+                    class="px-4 py-2 bg-green-600 text-white rounded-button hover:bg-green-700 whitespace-nowrap">
+                    Confirm
+                </button>
+            </div>
+        </div>
+    </div>
+    <div id="rejectModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 class="text-lg font-semibold text-black mb-4">Reject Proof</h3>
+            <p class="text-gray-600 mb-6">
+                Are you sure you want to reject this proof?
+            </p>
+            <div class="flex gap-3 justify-end">
+                <button onclick="hideRejectModal()"
+                    class="px-4 py-2 text-gray-600 border border-gray-300 rounded-button hover:bg-gray-50 whitespace-nowrap">
+                    Cancel
+                </button>
+                <button onclick="confirmReject()"
+                    class="px-4 py-2 bg-red-600 text-white rounded-button hover:bg-red-700 whitespace-nowrap">
+                    Confirm
+                </button>
+            </div>
+        </div>
+    </div>
+    <script id="modal-functionality">
+        function showFullImage(src) {
+            const modal = document.getElementById("photoModal");
+            const modalImg = document.getElementById("modalImage");
+            modalImg.src = src;
+            modal.style.display = "flex";
+        }
+        function showVerifyModal() {
+            document.getElementById("verifyModal").classList.remove("hidden");
+        }
+        function hideVerifyModal() {
+            document.getElementById("verifyModal").classList.add("hidden");
+        }
+        function showRejectModal() {
+            document.getElementById("rejectModal").classList.remove("hidden");
+        }
+        function hideRejectModal() {
+            document.getElementById("rejectModal").classList.add("hidden");
+        }
+        function confirmVerify() {
+            alert("Proof verified successfully!");
+            hideVerifyModal();
+        }
+        function confirmReject() {
+            alert("Proof rejected successfully!");
+            hideRejectModal();
+        }
+    </script>
+    <script id="qr-code-functionality">
+        function downloadQRCode(button) {
+            const row = button.closest("tr");
+            const id = row.cells[0].textContent;
+            const username = row.cells[1].textContent;
+            const species = row.cells[2].textContent;
+            const location = row.cells[3].textContent;
+            const treeCount = row.cells[4].textContent;
+
+            const qrData = JSON.stringify({
+                id: id,
+                username: username,
+                species: species,
+                location: location,
+                treeCount: treeCount,
+            });
+
+            const canvas = button.parentElement.nextElementSibling;
+            const qr = new QRious({
+                element: canvas,
+                value: qrData,
+                size: 300,
+                backgroundAlpha: 1,
+                foreground: "#000000",
+                background: "#ffffff",
+                level: "H",
+            });
+
+            const link = document.createElement("a");
+            link.download = `tree-proof-qr-${id.padStart(3, "0")}.png`;
+            link.href = canvas.toDataURL("image/png");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+
+    <script id="sorting-functionality">
+        document.addEventListener("DOMContentLoaded", function () {
+            const table = document.getElementById("proofsTable");
+            const tbody = table.querySelector("tbody");
+            function sortTable(sortValue) {
+                const rows = Array.from(tbody.querySelectorAll("tr"));
+                if (sortValue === "default") return;
+                rows.sort((a, b) => {
+                    let aValue, bValue;
+                    switch (sortValue) {
+                        case "a-z":
+                            aValue = a.cells[1].textContent.toLowerCase();
+                            bValue = b.cells[1].textContent.toLowerCase();
+                            return aValue.localeCompare(bValue);
+                        case "z-a":
+                            aValue = a.cells[1].textContent.toLowerCase();
+                            bValue = b.cells[1].textContent.toLowerCase();
+                            return bValue.localeCompare(aValue);
+                        case "id":
+                            aValue = parseInt(a.cells[0].textContent);
+                            bValue = parseInt(b.cells[0].textContent);
+                            return aValue - bValue;
+                        case "name":
+                            aValue = a.cells[1].textContent.toLowerCase();
+                            bValue = b.cells[1].textContent.toLowerCase();
+                            return aValue.localeCompare(bValue);
+                        case "treecount":
+                            aValue = parseInt(a.cells[4].textContent);
+                            bValue = parseInt(b.cells[4].textContent);
+                            return bValue - aValue;
+                        case "uploaded":
+                            aValue = new Date(a.cells[6].textContent);
+                            bValue = new Date(b.cells[6].textContent);
+                            return bValue - aValue;
+                        case "species":
+                            aValue = a.cells[2].textContent.toLowerCase();
+                            bValue = b.cells[2].textContent.toLowerCase();
+                            return aValue.localeCompare(bValue);
+                        default:
+                            return 0;
+                    }
+                });
+                rows.forEach((row, index) => {
+                    if (index % 2 === 0) {
+                        row.classList.remove("bg-gray-25");
+                    } else {
+                        row.classList.add("bg-gray-25");
+                    }
+                    tbody.appendChild(row);
+                });
+            }
+            window.sortTable = sortTable;
+        });
+    </script>
+</body>
+
+</html>

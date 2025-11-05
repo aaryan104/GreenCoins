@@ -1,7 +1,7 @@
 <?php
     if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
-    define('BASE_URL', '/dashboard/greencoin');
+    define('BASE_URL', '/greencoin');
 
     define('DB_HOST', '127.0.0.1');
     define('DB_USER', 'root');

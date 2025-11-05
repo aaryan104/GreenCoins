@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Green Coin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2E7D32",
+                        secondary: "#4CAF50",
+                    },
+                    borderRadius: {
+                        none: "0px",
+                        sm: "4px",
+                        DEFAULT: "8px",
+                        md: "12px",
+                        lg: "16px",
+                        xl: "20px",
+                        "2xl": "24px",
+                        "3xl": "32px",
+                        full: "9999px",
+                        button: "8px",
+                    },
+                },
+            },
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet" />
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+        <div class="w-full px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <div class="text-2xl font-bold text-primary">GreenCoin</div>
+                    <nav class="hidden md:flex items-center space-x-6">
+                        <a href="#"
+                            class="text-gray-700 hover:text-primary transition-colors duration-200 font-medium">Submit
+                            Proof</a>
+                        <a href="#"
+                            class="text-gray-700 hover:text-primary transition-colors duration-200 font-medium">My
+                            Proofs</a>
+                        <a href="#"
+                            class="text-gray-700 hover:text-primary transition-colors duration-200 font-medium">Sell
+                            Credits</a>
+                        <a href="https://readdy.ai/home/77c20a2b-5be5-4c92-b682-7d2c2db02f89/b5f5378c-fbfb-4201-88bc-beaff5b7ebc0"
+                            data-readdy="true"
+                            class="text-gray-700 hover:text-primary transition-colors duration-200 font-medium">Leaderboard</a>
+                    </nav>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="md:hidden w-8 h-8 flex items-center justify-center">
+                        <i class="ri-menu-line text-xl text-gray-700"></i>
+                    </button>
+                    <a href="#"
+                        class="text-red-600 hover:text-red-700 transition-colors duration-200 font-medium">Logout</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="w-full px-6 py-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 mb-8">
+                <div class="flex flex-col items-center text-center">
+                    <div
+                        class="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center mb-4">
+                        <i class="ri-user-fill text-3xl text-white"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold text-gray-900 mb-2">Sarah Johnson</h1>
+                    <p class="text-gray-600 mb-4">sarah.johnson@email.com</p>
+                    <div class="flex items-center text-gray-500 text-sm">
+                        <div class="w-4 h-4 flex items-center justify-center mr-2">
+                            <i class="ri-calendar-line text-sm"></i>
+                        </div>
+                        <span>Joined March 15, 2024</span>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div
+                    class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 flex items-center justify-center bg-green-100 rounded-lg">
+                            <i class="ri-coin-line text-xl text-primary"></i>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-gray-600 text-sm font-medium">Available Credits</p>
+                        <p class="text-2xl font-bold text-gray-900">2,450</p>
+                    </div>
+                </div>
+                <div
+                    class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-lg">
+                            <i class="ri-file-text-line text-xl text-blue-600"></i>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-gray-600 text-sm font-medium">Total Proofs</p>
+                        <p class="text-2xl font-bold text-gray-900">127</p>
+                    </div>
+                </div>
+                <div
+                    class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-shadow duration-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 flex items-center justify-center bg-purple-100 rounded-lg">
+                            <i class="ri-trophy-line text-xl text-purple-600"></i>
+                        </div>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-gray-600 text-sm font-medium">Rank</p>
+                        <p class="text-2xl font-bold text-gray-900">#23</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-1 gap-6">
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                        Quick Actions
+                    </h3>
+                    <div class="space-y-3">
+                        <button href="plant_tree.php"
+                            class="w-full bg-primary hover:bg-green-700 text-white font-medium py-3 px-4 !rounded-button transition-colors duration-200 whitespace-nowrap">
+                            Submit New Proof
+                        </a>
+                        <a href="proof_list.php"
+                            class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-4 !rounded-button transition-colors duration-200 whitespace-nowrap">
+                            View My Proofs
+                        </a>
+                        <a href="sell_credits.php"
+                            class="w-full bg-secondary hover:bg-green-600 text-white font-medium py-3 px-4 !rounded-button transition-colors duration-200 whitespace-nowrap">
+                            Sell Credits
+                        </a>
+                        <a href="leaderboard.php"
+                            class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-3 px-4 !rounded-button transition-colors duration-200 whitespace-nowrap">
+                            Leaderboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script id="mobile-navigation">
+        document.addEventListener("DOMContentLoaded", function () {
+            const mobileMenuButton = document.querySelector(".md\\:hidden");
+            const navigation = document.querySelector("nav");
+            if (mobileMenuButton && navigation) {
+                mobileMenuButton.addEventListener("click", function () {
+                    navigation.classList.toggle("hidden");
+                    navigation.classList.toggle("flex");
+                });
+            }
+        });
+    </script>
+    <script id="card-interactions">
+        document.addEventListener("DOMContentLoaded", function () {
+            const cards = document.querySelectorAll(".hover\\:shadow-md");
+            cards.forEach((card) => {
+                card.addEventListener("mouseenter", function () {
+                    this.style.transform = "translateY(-2px)";
+                });
+                card.addEventListener("mouseleave", function () {
+                    this.style.transform = "translateY(0)";
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

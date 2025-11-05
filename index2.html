@@ -1,0 +1,1745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenCoin - Plant Trees, Earn Credits, Support Factories, Save Earth</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link rel="icon" type="img/logo/4.png" href="img/logo/4.png">
+
+    <style>
+        /* Modern Green Coin Styles */
+        :root {
+            --green-primary: #1B5E20;
+            --green-light: #66BB6A;
+            --green-accent: #4CAF50;
+            --blue-trust: #0D47A1;
+            --gold-coin: #FBC02D;
+            --cyan-accent: #00BCD4;
+            --white-clean: #FFFFFF;
+            --gray-light: #F8F9FA;
+            --gray-border: #E9ECEF;
+            --text-dark: #2C3E50;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Modern Navigation */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.navbar-hidden {
+            transform: translateY(-100%);
+        }
+
+        .navbar.navbar-visible {
+            transform: translateY(0);
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--green-primary) !important;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand i {
+            font-size: 2rem;
+            background: linear-gradient(135deg, var(--green-primary), var(--green-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--green-primary) !important;
+            background: rgba(76, 175, 80, 0.1) !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: var(--green-primary) !important;
+            background: rgba(76, 175, 80, 0.15) !important;
+        }
+
+        /* Revolutionary Hero Section */
+        .revolutionary-hero {
+            min-height: 100vh;
+            background: 
+                linear-gradient(135deg, rgba(232, 245, 233, 0.9) 0%, rgba(200, 230, 201, 0.8) 30%, rgba(165, 214, 167, 0.7) 70%, rgba(129, 199, 132, 0.8) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%2381C784;stop-opacity:0.8" /><stop offset="50%" style="stop-color:%234CAF50;stop-opacity:0.6" /><stop offset="100%" style="stop-color:%23388E3C;stop-opacity:0.7" /></linearGradient><linearGradient id="treeGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:%232E7D32;stop-opacity:0.9" /><stop offset="100%" style="stop-color:%231B5E20;stop-opacity:0.8" /></linearGradient></defs><rect width="1200" height="300" fill="url(%23skyGrad)"/><polygon points="0,300 150,250 300,280 450,240 600,270 750,230 900,260 1050,220 1200,250 1200,800 0,800" fill="url(%23treeGrad)"/><ellipse cx="200" cy="280" rx="40" ry="60" fill="%234CAF50" opacity="0.8"/><ellipse cx="180" cy="270" rx="35" ry="55" fill="%2366BB6A" opacity="0.7"/><ellipse cx="220" cy="275" rx="30" ry="50" fill="%23388E3C" opacity="0.9"/><ellipse cx="500" cy="270" rx="45" ry="65" fill="%234CAF50" opacity="0.8"/><ellipse cx="480" cy="260" rx="40" ry="60" fill="%2366BB6A" opacity="0.7"/><ellipse cx="520" cy="265" rx="35" ry="55" fill="%23388E3C" opacity="0.9"/><ellipse cx="800" cy="275" rx="50" ry="70" fill="%234CAF50" opacity="0.8"/><ellipse cx="780" cy="265" rx="45" ry="65" fill="%2366BB6A" opacity="0.7"/><ellipse cx="820" cy="270" rx="40" ry="60" fill="%23388E3C" opacity="0.9"/><ellipse cx="1000" cy="265" rx="35" ry="55" fill="%234CAF50" opacity="0.8"/><ellipse cx="980" cy="255" rx="30" ry="50" fill="%2366BB6A" opacity="0.7"/><ellipse cx="1020" cy="260" rx="25" ry="45" fill="%23388E3C" opacity="0.9"/></svg>') center/cover;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .revolutionary-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="trees" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><text x="10" y="15" text-anchor="middle" font-size="12" fill="%234CAF50" opacity="0.3">🌳</text></pattern><pattern id="leaves" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse"><text x="6" y="9" text-anchor="middle" font-size="8" fill="%2366BB6A" opacity="0.25">🍃</text></pattern></defs><rect width="100" height="100" fill="url(%23trees)"/><rect width="100" height="100" fill="url(%23leaves)"/></svg>');
+            opacity: 0.6;
+            animation: backgroundFloat 25s ease-in-out infinite;
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-10px) translateY(-5px); }
+            50% { transform: translateX(5px) translateY(-10px); }
+            75% { transform: translateX(-5px) translateY(5px); }
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="tree" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><text x="10" y="15" text-anchor="middle" font-size="12" fill="%23c8e6c9" opacity="0.3">🌳</text></pattern></defs><rect width="100" height="100" fill="url(%23tree)"/></svg>');
+            opacity: 0.1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--green-primary), var(--green-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary-green {
+            background: linear-gradient(135deg, var(--green-primary), var(--green-accent));
+            border: none;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-primary-green:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        .btn-outline-green {
+            border: 2px solid var(--green-primary);
+            color: var(--green-primary);
+            padding: 1rem 2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-green:hover {
+            background: var(--green-primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-border);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--green-primary);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-dark);
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        /* Animated Background */
+        .hero-bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Particle System */
+        .particle-system {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: linear-gradient(45deg, #4CAF50, #81C784);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite linear;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 20%; animation-delay: -2s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: -4s; }
+        .particle:nth-child(4) { left: 40%; animation-delay: -6s; }
+        .particle:nth-child(5) { left: 60%; animation-delay: -8s; }
+        .particle:nth-child(6) { left: 70%; animation-delay: -10s; }
+        .particle:nth-child(7) { left: 80%; animation-delay: -12s; }
+        .particle:nth-child(8) { left: 90%; animation-delay: -14s; }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Morphing Shapes */
+        .morphing-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: morphing 20s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, rgba(76, 175, 80, 0.1), rgba(129, 199, 132, 0.1));
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, rgba(33, 150, 243, 0.1), rgba(100, 181, 246, 0.1));
+            top: 60%;
+            right: 20%;
+            animation-delay: -7s;
+        }
+
+        .shape-3 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(45deg, rgba(255, 193, 7, 0.1), rgba(255, 238, 88, 0.1));
+            bottom: 30%;
+            left: 50%;
+            animation-delay: -14s;
+        }
+
+        @keyframes morphing {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* Hero Content */
+        .hero-content-wrapper {
+            position: relative;
+            z-index: 10;
+            padding: 2rem;
+        }
+
+        /* Glitch Effect Title */
+        .glitch-container {
+            margin-bottom: 2rem;
+        }
+
+        .glitch-text {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #1B5E20;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            animation: glitch 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-text::before {
+            animation: glitch-1 0.5s infinite;
+            color: #ff0040;
+            z-index: -1;
+        }
+
+        .glitch-text::after {
+            animation: glitch-2 0.5s infinite;
+            color: #00ff40;
+            z-index: -2;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes glitch-1 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes glitch-2 {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(2px, -2px); }
+            40% { transform: translate(2px, 2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(-2px, 2px); }
+        }
+
+        .glitch-subtitle {
+            color: #2E7D32;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 1rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Typewriter Effect */
+        .typewriter-container {
+            margin: 2rem 0;
+        }
+
+        .typewriter-text {
+            font-size: 1.1rem;
+            color: rgba(27, 94, 32, 0.9);
+            line-height: 1.6;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .cursor {
+            display: inline-block;
+            background-color: #4CAF50;
+            margin-left: 0.1rem;
+            width: 3px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Interactive Stats Orbs */
+        .stats-orbs {
+            display: flex;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .orb {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .orb-inner {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(129, 199, 132, 0.1));
+            border: 2px solid rgba(76, 175, 80, 0.3);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .orb:hover .orb-inner {
+            transform: scale(1.1);
+            border-color: rgba(76, 175, 80, 0.8);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(129, 199, 132, 0.2));
+        }
+
+        .orb-glow {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: radial-gradient(circle, rgba(76, 175, 80, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .orb:hover .orb-glow {
+            opacity: 1;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .orb-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .orb-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4CAF50;
+        }
+
+        .orb-label {
+            font-size: 0.8rem;
+            color: rgba(27, 94, 32, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Holographic CTA Buttons */
+        .holographic-cta {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .holo-btn {
+            position: relative;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(129, 199, 132, 0.3));
+            border: 2px solid rgba(46, 125, 50, 0.6);
+            border-radius: 50px;
+            color: #1B5E20;
+            text-decoration: none;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .holo-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .holo-btn:hover::before {
+            left: 100%;
+        }
+
+        .holo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+            border-color: rgba(46, 125, 50, 0.8);
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.3), rgba(129, 199, 132, 0.4));
+            color: #fff;
+        }
+
+        .btn-text {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* 3D Earth Visualization */
+        .visualization-container {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .earth-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+        }
+
+        .earth-sphere {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            animation: earthRotate 20s linear infinite;
+            box-shadow: 
+                inset -20px -20px 50px rgba(0, 0, 0, 0.5),
+                0 0 50px rgba(76, 175, 80, 0.3);
+        }
+
+        .earth-surface {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(76, 175, 80, 0.8) 10%, transparent 40%),
+                radial-gradient(circle at 70% 60%, rgba(76, 175, 80, 0.6) 15%, transparent 45%),
+                radial-gradient(circle at 20% 80%, rgba(76, 175, 80, 0.7) 12%, transparent 35%);
+        }
+
+        .earth-atmosphere {
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            top: -5%;
+            left: -5%;
+            border-radius: 50%;
+            background: radial-gradient(circle, transparent 60%, rgba(100, 181, 246, 0.2) 100%);
+            animation: atmosphereGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes earthRotate {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        @keyframes atmosphereGlow {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Orbiting Elements */
+        .orbit {
+            position: absolute;
+            border: 1px solid rgba(76, 175, 80, 0.2);
+            border-radius: 50%;
+            animation: orbitRotate 15s linear infinite;
+        }
+
+        .orbit-1 {
+            width: 120%;
+            height: 120%;
+            top: -10%;
+            left: -10%;
+            animation-duration: 10s;
+        }
+
+        .orbit-2 {
+            width: 140%;
+            height: 140%;
+            top: -20%;
+            left: -20%;
+            animation-duration: 15s;
+            animation-direction: reverse;
+        }
+
+        .orbit-3 {
+            width: 160%;
+            height: 160%;
+            top: -30%;
+            left: -30%;
+            animation-duration: 20s;
+        }
+
+        .orbit-element {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: rgba(76, 175, 80, 0.8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+        }
+
+        @keyframes orbitRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            z-index: 10;
+        }
+
+        .scroll-text {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .scroll-arrow {
+            width: 2px;
+            height: 30px;
+            background: rgba(76, 175, 80, 0.5);
+            margin: 0 auto;
+            position: relative;
+            animation: scrollBounce 2s infinite;
+        }
+
+        .arrow-head {
+            position: absolute;
+            bottom: 0;
+            left: -3px;
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid rgba(76, 175, 80, 0.5);
+            border-bottom: 2px solid rgba(76, 175, 80, 0.5);
+            transform: rotate(45deg);
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* Factory Animation Styles */
+        .factory-animation {
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            z-index: 5;
+        }
+
+        .factory-building {
+            position: relative;
+            font-size: 3rem;
+            animation: factoryPulse 3s ease-in-out infinite;
+        }
+
+        .smoke-stack {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .smoke {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: rgba(200, 200, 200, 0.6);
+            border-radius: 50%;
+            animation: smokeRise 4s ease-out infinite;
+        }
+
+        .smoke-1 {
+            left: -10px;
+            animation-delay: 0s;
+        }
+
+        .smoke-2 {
+            left: 0px;
+            animation-delay: 1s;
+        }
+
+        .smoke-3 {
+            left: 10px;
+            animation-delay: 2s;
+        }
+
+        @keyframes factoryPulse {
+            0%, 100% { transform: scale(1); filter: brightness(1); }
+            50% { transform: scale(1.05); filter: brightness(1.2); }
+        }
+
+        @keyframes smokeRise {
+            0% {
+                transform: translateY(0) scale(0.5);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-30px) scale(1);
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-60px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Carbon Credit Flow */
+        .carbon-flow {
+            position: absolute;
+            top: 50%;
+            left: -50px;
+            width: 200px;
+            height: 100px;
+        }
+
+        .credit-particle {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: creditFlow 6s ease-in-out infinite;
+        }
+
+        .credit-1 {
+            top: 20%;
+            animation-delay: 0s;
+        }
+
+        .credit-2 {
+            top: 50%;
+            animation-delay: 2s;
+        }
+
+        .credit-3 {
+            top: 80%;
+            animation-delay: 4s;
+        }
+
+        @keyframes creditFlow {
+            0% {
+                transform: translateX(0) scale(0.5);
+                opacity: 0;
+            }
+            20% {
+                opacity: 1;
+                transform: translateX(50px) scale(1);
+            }
+            80% {
+                opacity: 1;
+                transform: translateX(150px) scale(1);
+            }
+            100% {
+                transform: translateX(200px) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* Nature Elements */
+        .nature-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .floating-tree {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: treeFloat 8s ease-in-out infinite;
+        }
+
+        .tree-1 {
+            top: 15%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .tree-2 {
+            bottom: 20%;
+            left: 10%;
+            animation-delay: -3s;
+        }
+
+        .floating-leaf {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: leafFloat 12s ease-in-out infinite;
+        }
+
+        .leaf-1 {
+            top: 25%;
+            right: 15%;
+            animation-delay: 0s;
+        }
+
+        .leaf-2 {
+            top: 60%;
+            right: 25%;
+            animation-delay: -4s;
+        }
+
+        .leaf-3 {
+            bottom: 30%;
+            right: 10%;
+            animation-delay: -8s;
+        }
+
+        @keyframes treeFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                filter: brightness(1);
+            }
+            25% {
+                transform: translateY(-10px) rotate(2deg);
+                filter: brightness(1.1);
+            }
+            50% {
+                transform: translateY(-5px) rotate(0deg);
+                filter: brightness(1.2);
+            }
+            75% {
+                transform: translateY(-15px) rotate(-2deg);
+                filter: brightness(1.1);
+            }
+        }
+
+        @keyframes leafFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 0.7;
+            }
+            25% {
+                transform: translateY(-20px) rotate(90deg) scale(1.1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-10px) rotate(180deg) scale(0.9);
+                opacity: 0.8;
+            }
+            75% {
+                transform: translateY(-30px) rotate(270deg) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Enhanced Data Flow */
+        .data-flow {
+            position: absolute;
+            bottom: 10%;
+            left: 20%;
+            width: 60%;
+            height: 20%;
+            z-index: 3;
+        }
+
+        .flow-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.6), transparent);
+            animation: dataFlow 3s ease-in-out infinite;
+        }
+
+        .flow-1 {
+            top: 20%;
+            width: 40%;
+            left: 0;
+            animation-delay: 0s;
+        }
+
+        .flow-2 {
+            top: 50%;
+            width: 60%;
+            left: 20%;
+            animation-delay: 1s;
+        }
+
+        .flow-3 {
+            top: 80%;
+            width: 50%;
+            left: 10%;
+            animation-delay: 2s;
+        }
+
+        .flow-node {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: rgba(76, 175, 80, 0.8);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+        }
+
+        .node-1 {
+            top: 15%;
+            left: 35%;
+        }
+
+        .node-2 {
+            top: 45%;
+            left: 65%;
+        }
+
+        .node-3 {
+            top: 75%;
+            left: 45%;
+        }
+
+        .node-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(76, 175, 80, 0.3);
+            animation: nodePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes dataFlow {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scaleX(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scaleX(1.2);
+            }
+        }
+
+        @keyframes nodePulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(2);
+                opacity: 0.2;
+            }
+        }
+
+        /* Section Styles */
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            opacity: 0.7;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Workflow Cards */
+        .workflow-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-border);
+            height: 100%;
+        }
+
+        .workflow-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .workflow-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .workflow-steps {
+            list-style: none;
+            padding: 0;
+        }
+
+        .workflow-steps li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .workflow-steps li i {
+            color: var(--green-accent);
+            width: 20px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-primary-green,
+            .btn-outline-green {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Animations */
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.1;
+            font-size: 2rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Infographic Styles */
+        .infographic-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .infographic-step {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .step-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            margin: 0 auto 1rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .infographic-step h4 {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .infographic-step p {
+            color: var(--text-dark);
+            opacity: 0.7;
+        }
+
+        .arrow {
+            font-size: 2rem;
+            color: var(--green-accent);
+            font-weight: bold;
+        }
+
+        /* Workflow Section Styles */
+        .workflow-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .role-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-border);
+            height: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .role-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .role-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .role-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .workflow-timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .workflow-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--green-primary), var(--green-light));
+        }
+
+        .timeline-step {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-step::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--green-accent);
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .step-content {
+            background: var(--gray-light);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 3px solid var(--green-accent);
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-description {
+            color: var(--text-dark);
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Leaderboard Preview */
+        .leaderboard-preview {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            background: var(--gray-light);
+            transition: all 0.3s ease;
+        }
+
+        .leaderboard-item:hover {
+            transform: translateX(5px);
+            background: rgba(76, 175, 80, 0.1);
+        }
+
+        .rank-badge {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+        }
+
+        .user-info h5 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .user-stats {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Impact Section */
+        .impact-section {
+            background: linear-gradient(135deg, var(--green-primary) 0%, var(--green-accent) 100%);
+            color: white;
+        }
+
+        .impact-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .impact-number {
+            font-size: 3rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, white 100%);
+        }
+
+        .cta-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-border);
+        }
+
+        .cta-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .cta-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .cta-card h4 {
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .cta-card p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .btn-outline-green {
+            border: 2px solid var(--green-primary);
+            color: var(--green-primary);
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-green:hover {
+            background: var(--green-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hover effects for footer links */
+        .hover-opacity-100:hover {
+            opacity: 1 !important;
+        }
+
+        @media (max-width: 768px) {
+            .infographic-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .arrow {
+                transform: rotate(90deg);
+                margin: 1rem 0;
+            }
+            
+            .workflow-section .col-lg-6 {
+                margin-bottom: 2rem;
+            }
+            
+            .leaderboard-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .rank-badge {
+                position: static;
+                margin-bottom: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Modern Navigation -->
+    
+    <!-- About Green Coin Section -->
+    
+    <!-- Comprehensive Workflow Section -->
+
+    <!-- Leaderboard Preview Section -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <h2 class="section-title">Top Environmental Champions</h2>
+            <p class="section-subtitle">
+                See who's leading the charge in environmental conservation
+            </p>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="leaderboard-preview">
+                        <div class="leaderboard-item">
+                            <div class="rank-badge" style="background: linear-gradient(135deg, #FFD700, #FFA500);">1</div>
+                            <div class="user-info">
+                                <h5>EcoWarrior2024</h5>
+                                <div class="user-stats">
+                                    <span><i class="fas fa-tree me-1"></i>247 Trees</span>
+                                    <span><i class="fas fa-coins me-1"></i>1,235 Credits</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="leaderboard-item">
+                            <div class="rank-badge" style="background: linear-gradient(135deg, #C0C0C0, #A0A0A0);">2</div>
+                            <div class="user-info">
+                                <h5>GreenThumb_Pro</h5>
+                                <div class="user-stats">
+                                    <span><i class="fas fa-tree me-1"></i>198 Trees</span>
+                                    <span><i class="fas fa-coins me-1"></i>990 Credits</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="leaderboard-item">
+                            <div class="rank-badge" style="background: linear-gradient(135deg, #CD7F32, #B8860B);">3</div>
+                            <div class="user-info">
+                                <h5>TreePlanter_Hero</h5>
+                                <div class="user-stats">
+                                    <span><i class="fas fa-tree me-1"></i>156 Trees</span>
+                                    <span><i class="fas fa-coins me-1"></i>780 Credits</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <a href="leaderboard.php" class="btn btn-primary-green">
+                                <i class="fas fa-trophy me-2"></i>View Full Leaderboard
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact & Testimonials Section -->
+    <section class="section-padding impact-section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <h2 class="section-title text-white">Our Global Impact</h2>
+                    <p class="section-subtitle text-white opacity-75">
+                        Together, we're making a real difference for our planet
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="impact-card">
+                        <div class="impact-number counter" data-target="<?= $total_trees ?>"><?= number_format($total_trees) ?></div>
+                        <div class="impact-label">Trees Planted</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="impact-card">
+                        <div class="impact-number counter" data-target="<?= $total_greencoins ?>"><?= number_format($total_greencoins) ?></div>
+                        <div class="impact-label">Credits Exchanged</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="impact-card">
+                        <div class="impact-number">150+</div>
+                        <div class="impact-label">Factories Supported</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="impact-card">
+                        <div class="impact-number"><?= number_format($total_trees * 21.77, 0) ?>kg</div>
+                        <div class="impact-label">CO₂ Offset</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <blockquote class="blockquote text-white">
+                        <p class="mb-4 fs-4">"The best time to plant a tree was 20 years ago. The second best time is now."</p>
+                        <footer class="blockquote-footer text-white opacity-75">
+                            <cite title="Source Title">Chinese Proverb</cite>
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Call to Action Section -->
+    <section class="section-padding cta-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title">Join the Green Revolution</h2>
+                    <p class="section-subtitle">
+                        Choose your role and start making a difference today
+                    </p>
+                </div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="cta-card">
+                        <div class="cta-icon" style="background: linear-gradient(135deg, var(--green-primary), var(--green-light));">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4>Register as User</h4>
+                        <p>Plant trees, earn credits, and contribute to environmental conservation</p>
+                        <a href="register.php?type=user" class="btn btn-primary-green">
+                            <i class="fas fa-seedling me-2"></i>Join as User
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="cta-card">
+                        <div class="cta-icon" style="background: linear-gradient(135deg, var(--blue-trust), var(--cyan-accent));">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h4>Register as Factory</h4>
+                        <p>Purchase carbon credits to offset your environmental impact</p>
+                        <a href="register.php?type=factory" class="btn btn-primary-green">
+                            <i class="fas fa-building me-2"></i>Join as Factory
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="cta-card">
+                        <div class="cta-icon" style="background: linear-gradient(135deg, var(--gold-coin), #FF9800);">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h4>Register as NGO</h4>
+                        <p>Verify tree plantings and ensure environmental authenticity</p>
+                        <a href="register.php?type=ngo" class="btn btn-primary-green">
+                            <i class="fas fa-certificate me-2"></i>Join as NGO
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="cta-card">
+                        <div class="cta-icon" style="background: linear-gradient(135deg, #9C27B0, #E91E63);">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h4>Learn More</h4>
+                        <p>Discover how Green Coin is revolutionizing environmental action</p>
+                        <a href="#about" class="btn btn-outline-green">
+                            <i class="fas fa-book me-2"></i>Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-12 text-center">
+                    <h3 class="mb-3">Ready to make a difference?</h3>
+                    <p class="text-muted mb-4">Join thousands of users already making an impact</p>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="register.php" class="btn btn-primary-green btn-lg">
+                            <i class="fas fa-rocket me-2"></i>Get Started Now
+                        </a>
+                        <a href="#workflow" class="btn btn-outline-green btn-lg">
+                            <i class="fas fa-play me-2"></i>See How It Works
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modern Footer -->
+    <footer id="contact" class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <!-- Company Info -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="footer-brand mb-4">
+                        <i class="fas fa-leaf me-2" style="color: var(--green-light);"></i>
+                        <span class="h4 mb-0">GreenCoin</span>
+                    </div>
+                    <p class="text-light opacity-75 mb-4">
+                        Converting tree plantation into digital Green Credits, sold to factories as Carbon Credits. 
+                        Join the revolution in environmental conservation!
+                    </p>
+                    <div class="footer-stats">
+                        <div class="d-flex gap-4">
+                            <div class="text-center">
+                                <div class="h5 mb-0 text-success"><?= number_format($total_trees) ?>+</div>
+                                <small class="text-muted">Trees Planted</small>
+                            </div>
+                            <div class="text-center">
+                                <div class="h5 mb-0 text-success"><?= number_format($total_users) ?>+</div>
+                                <small class="text-muted">Active Users</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-light text-decoration-none opacity-75 hover-opacity-100">Home</a></li>
+                        <li class="mb-2"><a href="#about" class="text-light text-decoration-none opacity-75 hover-opacity-100">About</a></li>
+                        <li class="mb-2"><a href="#workflow" class="text-light text-decoration-none opacity-75 hover-opacity-100">Workflow</a></li>
+                        <li class="mb-2"><a href="leaderboard.php" class="text-light text-decoration-none opacity-75 hover-opacity-100">Leaderboard</a></li>
+                        <li class="mb-2"><a href="register.php" class="text-light text-decoration-none opacity-75 hover-opacity-100">Register</a></li>
+                    </ul>
+                </div>
+
+                <!-- User Types -->
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-3">Join As</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="register.php?type=user" class="text-light text-decoration-none opacity-75 hover-opacity-100">User</a></li>
+                        <li class="mb-2"><a href="register.php?type=factory" class="text-light text-decoration-none opacity-75 hover-opacity-100">Factory</a></li>
+                        <li class="mb-2"><a href="register.php?type=ngo" class="text-light text-decoration-none opacity-75 hover-opacity-100">NGO</a></li>
+                        <li class="mb-2"><a href="login.php" class="text-light text-decoration-none opacity-75 hover-opacity-100">Login</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact & Social -->
+                <div class="col-lg-4 col-md-6">
+                    <h5 class="mb-3">Stay Connected</h5>
+                    <p class="text-light opacity-75 mb-3">Get updates on environmental initiatives!</p>
+                    
+                    <!-- Social Media Links -->
+                    <div class="social-links mb-4">
+                        <a href="#" class="btn btn-outline-light btn-sm me-2 mb-2">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm me-2 mb-2">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm me-2 mb-2">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-light btn-sm me-2 mb-2">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+
+                    <!-- Environmental Impact -->
+                    <div class="environmental-impact">
+                        <div class="d-flex align-items-center text-success">
+                            <i class="fas fa-globe-americas me-2"></i>
+                            <span><?= number_format($total_trees * 21.77, 0) ?>kg CO₂ Offset</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <hr class="my-4 opacity-25">
+            
+            <!-- Footer Bottom -->
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0 text-light opacity-75">
+                        &copy; 2024 GreenCoin. Making the world greener, one tree at a time.
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#home" class="btn btn-outline-success btn-sm">
+                        <i class="fas fa-arrow-up me-1"></i>Back to Top
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/activity-animations.js"></script>
+</body>
+</html>
